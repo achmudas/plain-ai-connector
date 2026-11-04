@@ -1,0 +1,10 @@
+{
+  "model": "llama3.2:latest",
+  "options": { "temperature": 0.7, "num_predict": 500 },
+  "messages": [
+    {
+      "role": "user",
+      "content": "<document>\nMatterport SEC filing 10-K 2023\nItem 1. Business\nOur Company\nMatterport is leading the digitization and datafication of the built world. We believe the digital transformation of the built world will fundamentally change the way people interact with buildings and the physical spaces around them.\nSince its founding in 2011, Matterport's pioneering technology has set the standard for digitizing, accessing and managing buildings, spaces and places online.\nWe have recently experienced rapid growth. Our subscribers have grown approximately 49-fold from December 31, 2018 to December 31, 2022. Our revenue increased by approximately 22% to $136.1 million for the year ended December 31, 2022, from approximately $111.2 million for the year ended December 31, 2021.\nAs of December 31, 2022, our subscriber base had grown approximately 39% to over 701,000 subscribers from 503,000 subscribers as of December 31, 2021, with our digital twins reaching more than 170 countries.\n</document>\nFrom December 2018 to December 2022, by what amount did Matterport's subscribers grow?\nPut an answer under tag <citation> which corresponds to your answer."
+    }
+  ]
+}

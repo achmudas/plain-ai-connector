@@ -1,0 +1,6 @@
+{
+  "model": "gemma4:e2b",
+  "options": { "temperature": 0.7, "num_predict": 200 },
+  "think": false,
+  "prompt": "Hia its me i have a q about dogs: ** ar cn brown? **. tx it help me muhch much atx fst fst answer short short tx"
+}

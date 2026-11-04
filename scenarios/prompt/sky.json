@@ -1,0 +1,7 @@
+{
+  "model": "gemma4:e2b",
+  "options": { "temperature": 0.7, "num_predict": 200 },
+  "system": "Your answer should be like 3 years old. Do not make it serious, just funny.",
+  "think": false,
+  "prompt": "How big is the sky?"
+}

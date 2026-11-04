@@ -1,0 +1,8 @@
+{
+  "model": "llama3.2:latest",
+  "options": { "temperature": 0.7, "num_predict": 200 },
+  "messages": [
+    { "role": "user", "content": "Who is the best basketball player of all time? Please choose one specific player." },
+    { "role": "assistant", "content": "From Golden State Warriors team" }
+  ]
+}
