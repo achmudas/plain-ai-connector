@@ -13,14 +13,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatScenario implements Scenario {
+public class ChatScenario implements Scenario<OllamaResponse> {
 
-    private final OllamaClient<OllamaChatRequest> client;
+    private final OllamaClient<OllamaChatRequest, OllamaResponse> client;
     private final String scenarioFile;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public ChatScenario(String baseUrl, String scenarioFile) {
-        this.client = new OllamaHttpClient<>(baseUrl, "/api/chat");
+        this.client = new OllamaHttpClient<>(baseUrl, "/api/chat", OllamaResponse.class);
         this.scenarioFile = scenarioFile;
     }
 

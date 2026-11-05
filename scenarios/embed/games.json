@@ -1,0 +1,85 @@
+{
+  "model": "embeddinggemma",
+  "games": [
+    {
+      "game": "GTA",
+      "description": "Shooting game where you have a full freedom to do bad things in a game world."
+    },
+    {
+      "game": "Minecraft",
+      "description": "Open-world sandbox game where players gather resources, craft tools, and build structures in a procedurally generated world of blocks."
+    },
+    {
+      "game": "The Sims 4",
+      "description": "Life simulation game where players create and control virtual people, managing their careers, relationships, and daily needs."
+    },
+    {
+      "game": "Call of Duty: Warzone",
+      "description": "Battle royale shooter where up to 150 players parachute onto a map and fight to be the last squad standing."
+    },
+    {
+      "game": "FIFA 24",
+      "description": "Football simulation game featuring licensed clubs, players, and stadiums where you manage teams and play matches."
+    },
+    {
+      "game": "Red Dead Redemption 2",
+      "description": "Open-world western adventure set in 1899 where you play as an outlaw navigating loyalty, survival, and the decline of the frontier."
+    },
+    {
+      "game": "Stardew Valley",
+      "description": "Farming simulation RPG where players inherit a run-down farm, grow crops, raise animals, and build relationships with townsfolk."
+    },
+    {
+      "game": "Among Us",
+      "description": "Social deduction game where crewmates complete tasks on a spaceship while hidden impostors sabotage and eliminate them."
+    },
+    {
+      "game": "Elden Ring",
+      "description": "Challenging action RPG set in a dark fantasy open world where players battle powerful bosses to restore a shattered demigod order."
+    },
+    {
+      "game": "Fortnite",
+      "description": "Colorful battle royale where 100 players fight to survive while uniquely allowing them to build structures for cover and movement."
+    },
+    {
+      "game": "Cyberpunk 2077",
+      "description": "Futuristic open-world RPG set in a corrupt megacity where a mercenary fights for survival after a mind-altering implant."
+    },
+    {
+      "game": "Animal Crossing: New Horizons",
+      "description": "Relaxing life simulation where players develop a deserted island community, collect items, and visit friends in real time."
+    },
+    {
+      "game": "League of Legends",
+      "description": "Competitive online battle arena where two teams of five champions destroy the enemy's base in a strategic team fight."
+    },
+    {
+      "game": "Dark Souls III",
+      "description": "Punishing action RPG in a dying dark-fantasy world where precise combat and learning enemy patterns are essential to progress."
+    },
+    {
+      "game": "Portal 2",
+      "description": "Puzzle game where players use a portal gun to create linked doorways and solve physics-based challenges inside a research facility."
+    },
+    {
+      "game": "The Legend of Zelda: Breath of the Wild",
+      "description": "Open-world adventure where Link explores a ruined Hyrule, solving puzzles and mastering physics to defeat Calamity Ganon."
+    },
+    {
+      "game": "Rocket League",
+      "description": "High-speed competitive game that combines soccer with rocket-powered cars, requiring aerial control and team coordination."
+    },
+    {
+      "game": "Hollow Knight",
+      "description": "Atmospheric 2D metroidvania set in a vast insect kingdom underground, featuring precise combat and deep lore exploration."
+    },
+    {
+      "game": "Overwatch 2",
+      "description": "Team-based hero shooter where players pick from a roster of characters with unique abilities to capture objectives and push payloads."
+    },
+    {
+      "game": "Half-Life 2",
+      "description": "Landmark first-person shooter set in a dystopian Earth under alien occupation, pioneering physics-based combat and storytelling."
+    }
+  ]
+}

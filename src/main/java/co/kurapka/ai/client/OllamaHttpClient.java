@@ -1,7 +1,6 @@
 package co.kurapka.ai.client;
 
 import co.kurapka.ai.exception.OllamaException;
-import co.kurapka.ai.pojo.OllamaResponse;
 import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -12,18 +11,20 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class OllamaHttpClient<T> implements OllamaClient<T> {
+public class OllamaHttpClient<T, R> implements OllamaClient<T, R> {
 
     private final HttpClient httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final String url;
+    private final Class<R> responseClass;
 
-    public OllamaHttpClient(String baseUrl, String path) {
+    public OllamaHttpClient(String baseUrl, String path, Class<R> responseClass) {
         this.url = baseUrl + path;
+        this.responseClass = responseClass;
     }
 
     @Override
-    public OllamaResponse call(T request) {
+    public R call(T request) {
         try {
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(new URI(url))
@@ -36,7 +37,7 @@ public class OllamaHttpClient<T> implements OllamaClient<T> {
             if (response.statusCode() != 200) {
                 throw new OllamaException("Ollama returned " + response.statusCode() + ": " + response.body());
             }
-            return objectMapper.readValue(response.body(), OllamaResponse.class);
+            return objectMapper.readValue(response.body(), responseClass);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new OllamaException("Interrupted while calling Ollama API", e);

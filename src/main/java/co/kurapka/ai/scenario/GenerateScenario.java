@@ -10,14 +10,14 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 
-public class GenerateScenario implements Scenario {
+public class GenerateScenario implements Scenario<OllamaResponse> {
 
-    private final OllamaClient<OllamaGenerateRequest> client;
+    private final OllamaClient<OllamaGenerateRequest, OllamaResponse> client;
     private final String scenarioFile;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public GenerateScenario(String baseUrl, String scenarioFile) {
-        this.client = new OllamaHttpClient<>(baseUrl, "/api/generate");
+        this.client = new OllamaHttpClient<>(baseUrl, "/api/generate", OllamaResponse.class);
         this.scenarioFile = scenarioFile;
     }
 

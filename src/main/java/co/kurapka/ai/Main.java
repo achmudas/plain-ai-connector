@@ -1,9 +1,10 @@
 package co.kurapka.ai;
 
+import co.kurapka.ai.pojo.OllamaEmbedResponse;
 import co.kurapka.ai.pojo.OllamaResponse;
 import co.kurapka.ai.scenario.ChatScenario;
+import co.kurapka.ai.scenario.EmbeddingScenario;
 import co.kurapka.ai.scenario.GenerateScenario;
-import co.kurapka.ai.scenario.Scenario;
 
 import java.io.File;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class Main {
         String endpoint = args[0];
         String scenarioName = args[1];
 
-        if (!List.of("chat", "prompt").contains(endpoint)) {
+        if (!List.of("chat", "prompt", "embed").contains(endpoint)) {
             System.err.println("Unknown endpoint: " + endpoint);
             System.err.println();
             printUsage();
@@ -40,21 +41,19 @@ public class Main {
             System.exit(1);
         }
 
-        Scenario scenario = switch (endpoint) {
-            case "chat" -> new ChatScenario(BASE_URL, scenarioFile);
-            case "prompt" -> new GenerateScenario(BASE_URL, scenarioFile);
-            default -> throw new IllegalArgumentException("Unknown endpoint: " + endpoint);
-        };
-
         long startTime = System.nanoTime();
-        OllamaResponse res = scenario.run();
-        long endTime = System.nanoTime();
+        switch (endpoint) {
+            case "chat" -> printTextResponse(new ChatScenario(BASE_URL, scenarioFile).run(), startTime);
+            case "prompt" -> printTextResponse(new GenerateScenario(BASE_URL, scenarioFile).run(), startTime);
+            case "embed" -> printEmbedResponse(new EmbeddingScenario(BASE_URL, scenarioFile).run(), startTime);
+        }
+    }
 
-        String content = content(res);
-
-        long llmMs    = TimeUnit.NANOSECONDS.toMillis(res.totalDurationInModel());
-        long totalMs  = TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
+    private static void printTextResponse(OllamaResponse res, long startTime) {
+        long totalMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+        long llmMs = TimeUnit.NANOSECONDS.toMillis(res.totalDurationInModel());
         double tokensPerSec = res.tokensResponse() / (res.evalDurationInModel() / 1_000_000_000.0);
+        String content = res.message() != null ? res.message().content() : res.response();
 
         System.out.println("Model:    " + res.model());
         System.out.println("Response: " + content);
@@ -64,15 +63,24 @@ public class Main {
         System.out.printf("Duration: llm=%dms  total=%dms%n", llmMs, totalMs);
     }
 
-    private static String content(OllamaResponse res) {
-        return res.message() != null ? res.message().content() : res.response();
+    private static void printEmbedResponse(OllamaEmbedResponse res, long startTime) {
+        long totalMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+        long loadMs = TimeUnit.NANOSECONDS.toMillis(res.loadDuration());
+        int count = res.embeddings() != null ? res.embeddings().size() : 0;
+        int dims = (count > 0) ? res.embeddings().get(0).size() : 0;
+
+        System.out.println("Model:      " + res.model());
+        System.out.printf("Embeddings: %d vectors × %d dimensions%n", count, dims);
+        System.out.println();
+        System.out.printf("Tokens:     in=%-6d%n", res.promptEvalCount());
+        System.out.printf("Duration:   load=%dms  total=%dms%n", loadMs, totalMs);
     }
 
     private static void printUsage() {
         System.err.println("Usage: pac <endpoint> <scenario>");
         System.err.println();
         System.err.println("  Endpoints and available scenarios:");
-        for (String endpoint : List.of("chat", "prompt")) {
+        for (String endpoint : List.of("chat", "prompt", "embed")) {
             List<String> scenarios = scenarios(endpoint);
             String list = scenarios.isEmpty() ? "(none)" : String.join(", ", scenarios);
             System.err.printf("    %-8s → scenarios/%s/   (%s)%n", endpoint, endpoint, list);

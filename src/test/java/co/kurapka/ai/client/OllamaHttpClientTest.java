@@ -23,8 +23,8 @@ class OllamaHttpClientTest {
             .options(wireMockConfig().dynamicPort())
             .build();
 
-    private <T> OllamaHttpClient<T> client(String path) {
-        return new OllamaHttpClient<>("http://localhost:" + wm.getPort(), path);
+    private <T> OllamaHttpClient<T, OllamaResponse> client(String path) {
+        return new OllamaHttpClient<>("http://localhost:" + wm.getPort(), path, OllamaResponse.class);
     }
 
     // --- /api/chat ---
