@@ -22,10 +22,11 @@ The `pac` script builds the project automatically on first run.
 ./pac <endpoint> <scenario>
 ```
 
-| Endpoint | Ollama API      | Description                        |
-|----------|-----------------|------------------------------------|
-| `chat`   | `/api/chat`     | Multi-turn conversation with roles |
-| `prompt` | `/api/generate` | Single-turn raw prompt completion  |
+| Endpoint | Ollama API      | Description                                           |
+|----------|-----------------|-------------------------------------------------------|
+| `chat`   | `/api/chat`     | Multi-turn conversation with roles                    |
+| `prompt` | `/api/generate` | Single-turn raw prompt completion                     |
+| `embed`  | `/api/embed`    | Embed descriptions, then query interactively by text  |
 
 Running `./pac` with no arguments prints all available endpoints and scenarios.
 
@@ -59,6 +60,32 @@ The included examples are based on the [Anthropic prompt engineering interactive
 ```
 
 The `system` field is optional in both. For chat, it is prepended as the first message with role `system`.
+
+**Embed scenario** (`scenarios/embed/my-scenario.json`):
+```json
+{
+  "model": "embeddinggemma",
+  "games": [
+    { "game": "Chess", "description": "Two-player strategy board game played on an 8x8 grid." }
+  ]
+}
+```
+
+After embedding all descriptions the app enters an interactive loop — type a free-text query and get the descriptions ranked by cosine similarity:
+
+```
+Model:      embeddinggemma
+Embeddings: 20 vectors × 2048 dimensions
+
+Tokens:     in=1234
+Duration:   load=120ms  total=4200ms
+
+Query (blank to exit): open world crime
+   1. GTA                                      0.8923
+   2. Red Dead Redemption 2                    0.8541
+   3. Cyberpunk 2077                           0.8203
+   ...
+```
 
 ## Running tests
 
